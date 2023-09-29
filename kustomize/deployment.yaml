@@ -21,7 +21,7 @@ spec:
         fsGroup: 2000
       containers:
       - name: server
-        image: ghcr.io/alekczapski/demo-app:0.0.1
+        image: ghcr.io/alekczapski/demo-app:0.0.2
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
