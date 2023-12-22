@@ -87,16 +87,14 @@ pre {
         \/|__|   |__| %s
 Pod hostname: %s
 Node: %s
-Client IP: %s
 Current date and time: %s
 </pre>
 </body>
 </html>
 `
 
-	clientIP := r.Header.Get("X-Real-Ip")
 	dt := time.Now()
-	filledTemplate := fmt.Sprintf(htmlTemplate, release, os.Getenv("HOSTNAME"), os.Getenv("NODE_NAME"), clientIP, dt.String())
+	filledTemplate := fmt.Sprintf(htmlTemplate, release, os.Getenv("HOSTNAME"), os.Getenv("NODE_NAME"), dt.String())
 	fmt.Fprint(w, filledTemplate)
 }
 
