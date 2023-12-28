@@ -14,9 +14,14 @@ import (
 )
 
 var (
-	commit  = "unset"
-	release = "unset"
+	commit    = "unset"
+	release   = "unset"
+	startTime time.Time
 )
+
+func init() {
+	startTime = time.Now()
+}
 
 func main() {
 	log.Println("Starting the service...")
@@ -87,6 +92,7 @@ pre {
         \/|__|   |__| %s
 Pod hostname: %s
 Node: %s
+Uptime: %s
 Current date and time: %s
 </pre>
 </body>
@@ -94,7 +100,7 @@ Current date and time: %s
 `
 
 	dt := time.Now()
-	filledTemplate := fmt.Sprintf(htmlTemplate, release, os.Getenv("HOSTNAME"), os.Getenv("NODE_NAME"), dt.String())
+	filledTemplate := fmt.Sprintf(htmlTemplate, release, os.Getenv("HOSTNAME"), os.Getenv("NODE_NAME"), time.Since(startTime).Truncate(time.Second), dt.String())
 	fmt.Fprint(w, filledTemplate)
 }
 
